@@ -23,6 +23,7 @@ function App() {
   const [showPrizeEditor, setShowPrizeEditor] = useState(false);
   const [editedPrizes, setEditedPrizes] = useState(defaultPrizes.join('\n'));
   const [envelopeCount, setEnvelopeCount] = useState(6);
+  const [showDonation, setShowDonation] = useState(false);
 
   // Detect screen size and set envelope count
   useEffect(() => {
@@ -165,6 +166,12 @@ function App() {
             ⚙️ Set Prizes
           </button>
         )}
+
+        {!selectedEnvelope && (
+          <button className="donation-button" onClick={() => setShowDonation(true)}>
+            ☕ Buy Me a Coffee
+          </button>
+        )}
       </div>
 
       {showPrizeEditor && (
@@ -188,6 +195,20 @@ function App() {
                 ✕ Cancel
               </button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {showDonation && (
+        <div className="modal-overlay" onClick={() => setShowDonation(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={() => setShowDonation(false)}>✕</button>
+            <h3>☕ Buy Me a Coffee</h3>
+            <p className="editor-hint">Scan the QR code to support this project!</p>
+            <div className="qr-container">
+              <img src="/coffee.png" alt="Buy me a coffee QR code" className="qr-code" />
+            </div>
+            <p className="donation-thanks">Thank you for your support! 💖</p>
           </div>
         </div>
       )}
