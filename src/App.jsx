@@ -22,16 +22,28 @@ function App() {
   const [revealedEnvelopes, setRevealedEnvelopes] = useState(new Set());
   const [showPrizeEditor, setShowPrizeEditor] = useState(false);
   const [editedPrizes, setEditedPrizes] = useState(defaultPrizes.join('\n'));
+  const [envelopeCount, setEnvelopeCount] = useState(6);
+
+  // Detect screen size and set envelope count
+  useEffect(() => {
+    const updateEnvelopeCount = () => {
+      setEnvelopeCount(window.innerWidth >= 768 ? 8 : 6);
+    };
+
+    updateEnvelopeCount();
+    window.addEventListener('resize', updateEnvelopeCount);
+    return () => window.removeEventListener('resize', updateEnvelopeCount);
+  }, []);
 
   // Initialize envelopes with randomized prizes
   useEffect(() => {
     const shuffled = [...prizeOptions].sort(() => Math.random() - 0.5);
-    const initialEnvelopes = Array.from({ length: 6 }, (_, i) => ({
+    const initialEnvelopes = Array.from({ length: envelopeCount }, (_, i) => ({
       id: i + 1,
       prize: shuffled[i % shuffled.length]
     }));
     setEnvelopes(initialEnvelopes);
-  }, [prizeOptions]);
+  }, [prizeOptions, envelopeCount]);
 
   const handleEnvelopeClick = (envelope) => {
     if (revealedEnvelopes.has(envelope.id)) {
@@ -49,7 +61,7 @@ function App() {
 
   const resetGame = () => {
     const shuffled = [...prizeOptions].sort(() => Math.random() - 0.5);
-    const newEnvelopes = Array.from({ length: 6 }, (_, i) => ({
+    const newEnvelopes = Array.from({ length: envelopeCount }, (_, i) => ({
       id: i + 1,
       prize: shuffled[i % shuffled.length]
     }));
@@ -74,7 +86,7 @@ function App() {
     
     // Reset the game with new prizes
     const shuffled = [...newPrizes].sort(() => Math.random() - 0.5);
-    const newEnvelopes = Array.from({ length: 6 }, (_, i) => ({
+    const newEnvelopes = Array.from({ length: envelopeCount }, (_, i) => ({
       id: i + 1,
       prize: shuffled[i % shuffled.length]
     }));

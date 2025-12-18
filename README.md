@@ -2,6 +2,8 @@
 
 An interactive web app that simulates the exciting experience of receiving a red envelope (ampao) with a fun prize reveal mechanism!
 
+**🚀 [See Live Demo on Vercel](https://ampao.vercel.app/)**
+
 ## Features
 
 - **5 Beautiful Red Envelopes** - Realistic ampao envelope design with traditional gold "福" (fortune) symbol
