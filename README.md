@@ -1,5 +1,7 @@
 # 🧧 Digital Ampao - Red Envelope Prize Game
 
+See app on vercel [Digital Ampao]([url](https://ampao.vercel.app/))
+
 An interactive web app that simulates the exciting experience of receiving a red envelope (ampao) with a fun prize reveal mechanism!
 
 ## Features
